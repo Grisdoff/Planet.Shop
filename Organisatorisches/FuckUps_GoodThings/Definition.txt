@@ -1,0 +1,8 @@
+Fuck Up:
+Punkteabzug durch Schuld einer einzelnen Person
+
+Good Thing:
+Wenn eine einzelne Person außerhalb des Unterrichts singifikant Zeit ( > 45min) für
+den Erfolg des Projektes investiert
+
+Beispiel: A investiert zu Hause 1h in das Sprint Planning, gibt aber nicht ab --> Fuck up
