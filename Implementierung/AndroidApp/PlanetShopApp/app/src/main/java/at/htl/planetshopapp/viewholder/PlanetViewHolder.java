@@ -30,6 +30,6 @@ public class PlanetViewHolder extends RecyclerView.ViewHolder {
         String toPrice = new Double(card.getPrice()).toString();
         price.setText(toPrice);
         name.setText(card.getName());
-
+        imageView.setImageBitmap(card.getImageView());
     }
 }

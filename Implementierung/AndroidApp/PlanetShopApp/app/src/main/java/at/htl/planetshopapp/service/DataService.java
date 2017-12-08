@@ -71,7 +71,7 @@ public class DataService {
                         Log.v(TAG, id + ":" + price + ":" + name);
 
                         planetCards.add(
-                                new PlanetCard(id, price, name)
+                                new PlanetCard(id, price, name, newmap)
                         );
                     }
                     PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();

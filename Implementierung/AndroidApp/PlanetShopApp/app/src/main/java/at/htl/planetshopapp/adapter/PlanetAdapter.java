@@ -34,7 +34,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetViewHolder> {
 
     @Override
     public PlanetViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View vv = LayoutInflater.from(parent.getContext()).inflate(R.layout.card_test,parent,false);
+        View vv = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_main,parent,false);
         return new PlanetViewHolder(vv);
     }
 

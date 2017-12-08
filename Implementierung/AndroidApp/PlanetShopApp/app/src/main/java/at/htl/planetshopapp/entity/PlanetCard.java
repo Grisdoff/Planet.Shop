@@ -9,7 +9,7 @@ import android.widget.ImageView;
 
 public class PlanetCard {
 
-    private  int Id;
+    private int Id;
     private double Price;
     private String Name;
     private Bitmap imageView;
