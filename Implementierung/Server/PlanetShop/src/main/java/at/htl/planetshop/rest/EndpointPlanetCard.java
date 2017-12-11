@@ -1,8 +1,7 @@
 package at.htl.planetshop.rest;
 
-import at.htl.planetshop.entity.PlanetCard;
-import at.htl.planetshop.facade.CardFacade;
-import com.sun.jndi.toolkit.url.Uri;
+import at.htl.planetshop.entity.Product;
+import at.htl.planetshop.facade.ProductFacade;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -16,25 +15,25 @@ import java.util.List;
 @Path("planet")
 public class EndpointPlanetCard {
     @Inject
-    CardFacade cardFacade;
+    private ProductFacade productFacade;
 
 
     @GET
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public List<PlanetCard> findAll(){
-        return cardFacade.findAll();
+    public List<Product> findAll(){
+        return productFacade.findAll();
     }
 
     @GET
     @Path("{id}")
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public PlanetCard findById(@PathParam("id") long id){
-        return cardFacade.findById(id);
+    public Product findById(@PathParam("id") long id){
+        return productFacade.findById(id);
     }
 
     @POST
-    public Response save(PlanetCard card, @Context UriInfo uriInfo) {
-        PlanetCard saved = this.cardFacade.saveItem(card);
+    public Response save(Product card, @Context UriInfo uriInfo) {
+        Product saved = this.productFacade.saveItem(card);
         Long id = (long) saved.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+ id).build();
         return Response.created(uri).build();

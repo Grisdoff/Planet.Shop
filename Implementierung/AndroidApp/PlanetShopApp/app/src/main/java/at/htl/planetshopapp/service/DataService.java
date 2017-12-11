@@ -48,7 +48,6 @@ public class DataService {
     }
 
 
-
     public void getJson() {
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
