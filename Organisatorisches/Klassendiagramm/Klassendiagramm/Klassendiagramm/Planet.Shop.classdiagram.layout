@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Planet.Shop">
+  <logicalClassDesignerModelMoniker Id="df63d01e-88cf-4e26-a49b-433c1656725c" />
+  <nestedChildShapes>
+    <packageShape Id="7f10d38e-7a4c-4559-ae47-aad180f4e284" absoluteBounds="0.625, 0.5, 3.5, 4.75" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="714c4aff-6713-4e9d-8037-57927951a395" LastKnownName="Server" />
+    </packageShape>
+    <packageShape Id="9f9b5e3a-83d9-4c14-8cfc-0afacc1722f7" absoluteBounds="5.375, 0.5, 3.625, 4.75" customColor="255, 249, 230" hideQualifiedName="false">
+      <packageMoniker Id="8b2d055f-3c31-4670-ab8d-106551ca8bae" LastKnownName="App" />
+    </packageShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>
