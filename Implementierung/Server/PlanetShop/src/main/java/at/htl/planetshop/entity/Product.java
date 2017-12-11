@@ -7,49 +7,46 @@ import java.io.Serializable;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "findAll",query = "select v from PlanetCard v")
+        @NamedQuery(name = "findAll",query = "select v from Product v")
 })
 @XmlRootElement
-public class PlanetCard implements Serializable{
+public class Product implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int Id;
-    @Column(name = "Price")
-    double Price;
-    @Column(name = "Name")
-    String Name;
+    private int id;
+    private double price;
+    private String name;
     @Lob
-    @Column(name = "PlanetPicture")
-    byte[] image;
+    private byte[] image;
 
-    public PlanetCard() {
+    public Product() {
     }
 
-    public PlanetCard(double price, String name) {
-        Price = price;
-        Name = name;
+    public Product(double price, String name) {
+        this.price = price;
+        this.name = name;
     }
 
-    public PlanetCard(double price, String name, byte[] image) {
-        Price = price;
-        Name = name;
+    public Product(double price, String name, byte[] image) {
+        this.price = price;
+        this.name = name;
         this.image = image;
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(double price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public byte[] getImage() {
@@ -61,6 +58,6 @@ public class PlanetCard implements Serializable{
     }
 
     public int getId() {
-        return Id;
+        return id;
     }
 }
