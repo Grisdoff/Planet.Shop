@@ -28,7 +28,7 @@ import at.htl.planetshopapp.fragment.MainFragment;
 
 public class DataService {
     public static final String TAG = DataService.class.getSimpleName();
-    public static final String Base = "http://10.0.2.2:8080/PlanetShop/rs/shop";
+    public static final String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
     public ArrayList<PlanetCard> planetCards = new ArrayList<>();
 
 

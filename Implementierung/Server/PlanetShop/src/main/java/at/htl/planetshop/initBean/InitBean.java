@@ -1,5 +1,6 @@
 package at.htl.planetshop.initBean;
-import at.htl.planetshop.entity.Product;
+
+import at.htl.planetshop.entities.Product;
 import at.htl.planetshop.facade.ProductFacade;
 
 import javax.annotation.PostConstruct;
@@ -9,6 +10,7 @@ import javax.inject.Inject;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+
 
 @Startup
 @Singleton
@@ -20,11 +22,10 @@ public class InitBean {
     @PostConstruct
     public void init() throws IOException {
         System.out.println();
-        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\testpicture.jpg")));
-        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\kleid.jpg")));
+        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\testpicture.jpg")));
+        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\kleid.jpg")));
 
         productFacade.saveItem(card);
         productFacade.saveItem(card1);
     }
-
 }

@@ -1,6 +1,6 @@
 package at.htl.planetshop.facade;
 
-import at.htl.planetshop.entity.Product;
+import at.htl.planetshop.entities.Product;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
