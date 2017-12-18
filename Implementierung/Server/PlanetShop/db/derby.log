@@ -1,12 +1,25 @@
-Fri Dec 08 16:33:37 CET 2017 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Mon Dec 11 10:27:03 CET 2017 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Fri Dec 08 16:34:52 CET 2017:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0160-36c2-afa9-000006f2b328 
-on database directory C:\Users\Robin\Desktop\Schule\SYP\PlanettShopAktuell\Planet.Shop\Implementierung\Server\PlanetShop\db\db with class loader sun.misc.Launcher$AppClassLoader@610455d6 
-Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_102/db/lib/derby.jar
+Mon Dec 11 10:27:34 CET 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0160-44e6-2ab5-000006ef63f8 
+on database directory C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShop\db\db with class loader sun.misc.Launcher$AppClassLoader@60e53b93 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_131/db/lib/derby.jar
 java.vendor=Oracle Corporation
-java.runtime.version=1.8.0_102-b14
-user.dir=C:\Users\Robin\Desktop\Schule\SYP\PlanettShopAktuell\Planet.Shop\Implementierung\Server\PlanetShop\db
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShop\db
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Mon Dec 11 11:12:16 CET 2017:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance 9a4840c2-0160-44e6-2ab5-000006ef63f8 
+on database directory C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShop\db\dbds with class loader sun.misc.Launcher$AppClassLoader@60e53b93 
+Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_131/db/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShop\db
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0

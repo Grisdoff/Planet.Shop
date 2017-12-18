@@ -1,6 +1,6 @@
 package at.htl.planetshop.initBean;
-import at.htl.planetshop.entity.PlanetCard;
-import at.htl.planetshop.facade.CardFacade;
+import at.htl.planetshop.entity.Product;
+import at.htl.planetshop.facade.ProductFacade;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
@@ -15,15 +15,16 @@ import java.nio.file.Paths;
 public class InitBean {
 
     @Inject
-    CardFacade cardFacade;
+    private ProductFacade productFacade;
 
     @PostConstruct
     public void init() throws IOException {
-        PlanetCard card = new PlanetCard(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\Robin\\Desktop\\Schule\\SYP\\PlanettShopAktuell\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\testpicture.jpg")));
-        PlanetCard card1 = new PlanetCard(17, "Kleid", Files.readAllBytes(Paths.get("C:\\Users\\Robin\\Desktop\\Schule\\SYP\\PlanettShopAktuell\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\kleid.jpg")));
-        //PlanetCard card2 = new PlanetCard(34, "Dildo");
-        cardFacade.saveItem(card);
-        cardFacade.saveItem(card1);
+        System.out.println();
+        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\testpicture.jpg")));
+        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShop\\kleid.jpg")));
+
+        productFacade.saveItem(card);
+        productFacade.saveItem(card1);
     }
 
 }
