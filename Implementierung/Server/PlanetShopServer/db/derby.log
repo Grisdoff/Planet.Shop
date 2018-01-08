@@ -1,12 +1,12 @@
-Mon Jan 08 10:36:15 CET 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
+Mon Jan 08 11:11:20 CET 2018 : Apache Derby Network Server - 10.11.1.2 - (1629631) started and ready to accept connections on port 1527
 ----------------------------------------------------------------
-Mon Jan 08 10:36:43 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0160-d520-a9d1-000006f05c00 
-on database directory C:\Users\Daniel\Desktop\PlanetShop\db\db with class loader sun.misc.Launcher$AppClassLoader@60e53b93 
+Mon Jan 08 11:11:29 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.2 - (1629631): instance a816c00e-0160-d540-c887-000006f05920 
+on database directory C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShopServer\db\db with class loader sun.misc.Launcher$AppClassLoader@60e53b93 
 Loaded from file:/C:/Program%20Files/Java/jdk1.8.0_131/db/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_131-b11
-user.dir=C:\Users\Daniel\Desktop\PlanetShop\db
+user.dir=C:\Users\Daniel\Documents\GitHub\Planet.Shop\Implementierung\Server\PlanetShopServer\db
 os.name=Windows 10
 os.arch=amd64
 os.version=10.0
