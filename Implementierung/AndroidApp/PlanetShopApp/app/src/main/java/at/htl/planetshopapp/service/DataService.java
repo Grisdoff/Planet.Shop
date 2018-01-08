@@ -28,7 +28,7 @@ import at.htl.planetshopapp.fragment.MainFragment;
 
 public class DataService {
     private static final String TAG = DataService.class.getSimpleName();
-    private static final String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
+    private static String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
     private ArrayList<PlanetCard> planetCards = new ArrayList<>();
     private PlanetCard planetCard;
 
@@ -43,28 +43,26 @@ public class DataService {
     }
 
     public PlanetCard getById(final Long searchId) {
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        String url = Base + "/getProductById/" + searchId;
+        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                Base,null,
+                url,null,
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
                         try {
-                            // Loop through the array elements
-                            for (int i = 0; i < response.length(); i++) {
-                                JSONObject jsonObject = response.getJSONObject(i);
-                                Long id = (long)jsonObject.getInt("id");
-                                if(searchId == id) {
-                                    double price = jsonObject.getDouble("price");
-                                    String name = jsonObject.getString("name");
-                                    String map = jsonObject.getString("image");
-                                    Bitmap newmap = stringToBitmap(map);
+                            JSONObject jsonObject = response.getJSONObject(0);
+                            Long id = (long)jsonObject.getInt("id");
+                            double price = jsonObject.getDouble("price");
+                            String name = jsonObject.getString("name");
+                            String description = jsonObject.getString("description");
+                            String map = jsonObject.getString("image");
+                            Bitmap newmap = stringToBitmap(map);
 
-                                    Log.v(TAG, id + ":" + price + ":" + name);
+                            Log.v(TAG, id + ":" + price + ":" + name);
 
-                                    planetCard = new PlanetCard(id, price, name, newmap);
-                                }
-                            }
+                            planetCard = new PlanetCard(id, price, name, newmap);
+                            planetCard.setDescription(description);
                             PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -85,9 +83,10 @@ public class DataService {
     }
 
     public ArrayList<PlanetCard> getAllProducts() {
+        String url = Base + "/getAllProducts";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
-                Base,null,
+                url,null,
                 new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {

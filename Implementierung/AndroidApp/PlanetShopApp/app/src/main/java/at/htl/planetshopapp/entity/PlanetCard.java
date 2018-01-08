@@ -12,6 +12,7 @@ public class PlanetCard {
     private double price;
     private String name;
     private Bitmap imageView;
+    private String description;
 
     //region Constructors
     public PlanetCard() {
@@ -52,6 +53,14 @@ public class PlanetCard {
 
     public void setImageView(Bitmap imageView) {
         this.imageView = imageView;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     //endregion
 }

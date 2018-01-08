@@ -19,7 +19,7 @@ public class Product implements Serializable{
     @Lob
     private byte[] image;
 
-    private String details;
+    private String description;
 
     public Product() {
     }
@@ -30,11 +30,11 @@ public class Product implements Serializable{
         this.name = name;
     }
 
-    public Product(double price, String name, byte[] image, String details) {
+    public Product(double price, String name, byte[] image, String description) {
         this.price = price;
         this.name = name;
         this.image = image;
-        this.details = details;
+        this.description = description;
     }
     //endregion
 
@@ -67,12 +67,12 @@ public class Product implements Serializable{
         return id;
     }
 
-    public String getDetails() {
-        return details;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDetails(String details) {
-        this.details = details;
+    public void setDescription(String description) {
+        this.description = description;
     }
     //endregion
 }

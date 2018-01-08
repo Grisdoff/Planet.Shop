@@ -27,7 +27,7 @@ public class ProductEndpoint {
     }
 
     @GET
-    @Path("getProductDetails/{id}")
+    @Path("getProductById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Product getProductDetails(@PathParam("id") Long id) {
         return productFacade.findById(id);
