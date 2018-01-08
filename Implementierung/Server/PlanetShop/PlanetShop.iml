@@ -18,7 +18,10 @@
         <setting name="provider-name" value="" />
         <datasource-mapping>
           <factory-entry name="DbDS" />
+<<<<<<< HEAD
           <factory-entry name="myPU" />
+=======
+>>>>>>> 4d339bfb2ca6bc284680a2d481ecc965f8293c39
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

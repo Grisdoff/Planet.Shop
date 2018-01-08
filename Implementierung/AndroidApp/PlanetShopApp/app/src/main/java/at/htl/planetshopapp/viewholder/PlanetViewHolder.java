@@ -2,6 +2,7 @@ package at.htl.planetshopapp.viewholder;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
@@ -33,3 +34,5 @@ public class PlanetViewHolder extends RecyclerView.ViewHolder {
         imageView.setImageBitmap(card.getImageView());
     }
 }
+
+

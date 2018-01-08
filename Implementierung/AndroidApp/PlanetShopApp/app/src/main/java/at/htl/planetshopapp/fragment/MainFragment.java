@@ -13,6 +13,7 @@ import at.htl.planetshopapp.activity.MainActivity;
 import at.htl.planetshopapp.R;
 import at.htl.planetshopapp.service.DataService;
 import at.htl.planetshopapp.adapter.PlanetAdapter;
+import at.htl.planetshopapp.viewholder.Decorater;
 
 public class MainFragment extends Fragment {
     private static MainFragment mainFragment;
@@ -52,6 +53,7 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         PlanetAdapter listadapter = new PlanetAdapter(DataService.getInstance().GetAll());
+        recyclerView.addItemDecoration(new Decorater(2,12,false));
         recyclerView.setAdapter(listadapter);
         return view;
     }

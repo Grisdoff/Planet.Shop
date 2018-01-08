@@ -2,7 +2,7 @@ package at.htl.planetshop.entities;
 
 import javax.persistence.*;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.io.Serializable;
+
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -10,7 +10,7 @@ import java.io.Serializable;
         @NamedQuery(name = "findAll",query = "select v from Product v")
 })
 @XmlRootElement
-public class Product implements Serializable{
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

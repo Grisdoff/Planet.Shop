@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="PlanetShop" />
+        <module name="Syp" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="PlanetShop" target="1.8" />
+      <module name="Syp" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

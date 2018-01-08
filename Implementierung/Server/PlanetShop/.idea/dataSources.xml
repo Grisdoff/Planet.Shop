@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+<<<<<<< HEAD
     <data-source source="LOCAL" name="db@localhost" uuid="9ec171ec-a94e-46a6-bb0d-c19f97d4a00a">
+=======
+    <data-source source="LOCAL" name="PlanetShop@localhost" uuid="9e7c2488-ae87-49dc-8652-66a4c6fdc9bb">
+>>>>>>> 4d339bfb2ca6bc284680a2d481ecc965f8293c39
       <driver-ref>derby.remote</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.apache.derby.jdbc.ClientDriver</jdbc-driver>
-      <jdbc-url>jdbc:derby://localhost:1527/db;create=true</jdbc-url>
+      <jdbc-url>jdbc:derby://localhost:1527/dbds</jdbc-url>
     </data-source>
   </component>
 </project>
