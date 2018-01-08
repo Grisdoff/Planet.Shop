@@ -4,6 +4,8 @@ import at.htl.planetshop.entity.Product;
 import at.htl.planetshop.facade.ProductFacade;
 
 import javax.inject.Inject;
+import javax.json.JsonArray;
+import javax.json.JsonArrayBuilder;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -13,21 +15,21 @@ import java.net.URI;
 import java.util.List;
 
 @Path("planet")
-public class EndpointPlanetCard {
+public class ProductEndpoint {
     @Inject
     private ProductFacade productFacade;
 
-
     @GET
+    @Path("getAllProducts")
     @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public List<Product> findAll(){
-        return productFacade.findAll();
+    public JsonArray getAllProducts(){
+        return productFacade.getAllProducts();
     }
 
     @GET
-    @Path("{id}")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
-    public Product findById(@PathParam("id") long id){
+    @Path("getProductDetails/{id}")
+    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
+    public Product getProductDetails(@PathParam("id") long id) {
         return productFacade.findById(id);
     }
 

@@ -19,6 +19,8 @@ public class Product implements Serializable{
     @Lob
     private byte[] image;
 
+    private String details;
+
     public Product() {
     }
 
@@ -27,12 +29,14 @@ public class Product implements Serializable{
         this.name = name;
     }
 
-    public Product(double price, String name, byte[] image) {
+    public Product(double price, String name, byte[] image, String details) {
         this.price = price;
         this.name = name;
         this.image = image;
+        this.details = details;
     }
 
+    //region Getter Setter
     public double getPrice() {
         return price;
     }
@@ -60,4 +64,13 @@ public class Product implements Serializable{
     public int getId() {
         return id;
     }
+
+    public String getDetails() {
+        return details;
+    }
+
+    public void setDetails(String details) {
+        this.details = details;
+    }
+    //endregion
 }
