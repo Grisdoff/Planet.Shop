@@ -1,7 +1,7 @@
 package at.htl.planetshop.rest;
 
-import at.htl.planetshop.entity.Product;
-import at.htl.planetshop.facade.ProductFacade;
+import at.htl.planetshop.entities.Product;
+import at.htl.planetshop.business.ProductFacade;
 
 import javax.inject.Inject;
 import javax.json.JsonArray;
@@ -21,15 +21,15 @@ public class ProductEndpoint {
 
     @GET
     @Path("getAllProducts")
-    @Produces({MediaType.APPLICATION_JSON,MediaType.APPLICATION_XML})
+    @Produces(MediaType.APPLICATION_JSON)
     public JsonArray getAllProducts(){
         return productFacade.getAllProducts();
     }
 
     @GET
     @Path("getProductDetails/{id}")
-    @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
-    public Product getProductDetails(@PathParam("id") long id) {
+    @Produces(MediaType.APPLICATION_JSON)
+    public Product getProductDetails(@PathParam("id") Long id) {
         return productFacade.findById(id);
     }
 

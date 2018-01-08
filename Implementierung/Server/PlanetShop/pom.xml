@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>at.htl.planetshop</groupId>
-    <artifactId>PlanetShop</artifactId>
+    <artifactId>planetshop</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
@@ -25,6 +25,6 @@
     </dependencies>
 
     <build>
-        <finalName>PlanetShop</finalName>
+        <finalName>planetshop</finalName>
     </build>
 </project>
