@@ -1,7 +1,6 @@
 package at.htl.planetshopapp.entity;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 /**
  * Created by Patrick on 24.11.2017.
@@ -9,52 +8,42 @@ import android.widget.ImageView;
 
 public class PlanetCard {
 
-    private int Id;
-    private double Price;
-    private String Name;
+    private Long id;
+    private double price;
+    private String name;
     private Bitmap imageView;
 
-    public PlanetCard(double price, String name, Bitmap imageView) {
-        Price = price;
-        Name = name;
+    //region Constructors
+    public PlanetCard() {
+    }
+
+    public PlanetCard(Long id, double price, String name, Bitmap imageView) {
+        this.id = id;
+        this.price = price;
+        this.name = name;
         this.imageView = imageView;
     }
+    //endregion
 
-    public PlanetCard(int id, double price, String name) {
-        Id = id;
-        Price = price;
-        Name = name;
-    }
-
-    public PlanetCard(int id, double price, String name, Bitmap imageView) {
-        Id = id;
-        Price = price;
-        Name = name;
-        this.imageView = imageView;
-    }
-
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
+    //region Getter Setter
+    public Long getId() {
+        return id;
     }
 
     public double getPrice() {
-        return Price;
+        return price;
     }
 
     public void setPrice(double price) {
-        Price = price;
+        this.price = price;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 
     public Bitmap getImageView() {
@@ -64,4 +53,5 @@ public class PlanetCard {
     public void setImageView(Bitmap imageView) {
         this.imageView = imageView;
     }
+    //endregion
 }

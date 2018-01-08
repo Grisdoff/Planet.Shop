@@ -27,9 +27,10 @@ import at.htl.planetshopapp.fragment.MainFragment;
  */
 
 public class DataService {
-    public static final String TAG = DataService.class.getSimpleName();
-    public static final String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
-    public ArrayList<PlanetCard> planetCards = new ArrayList<>();
+    private static final String TAG = DataService.class.getSimpleName();
+    private static final String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
+    private ArrayList<PlanetCard> planetCards = new ArrayList<>();
+    private PlanetCard planetCard;
 
 
     private static final DataService ourInstance = new DataService();
@@ -41,15 +42,49 @@ public class DataService {
     private DataService() {
     }
 
+    public PlanetCard getById(final Long searchId) {
+        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+                Request.Method.GET,
+                Base,null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            // Loop through the array elements
+                            for (int i = 0; i < response.length(); i++) {
+                                JSONObject jsonObject = response.getJSONObject(i);
+                                Long id = (long)jsonObject.getInt("id");
+                                if(searchId == id) {
+                                    double price = jsonObject.getDouble("price");
+                                    String name = jsonObject.getString("name");
+                                    String map = jsonObject.getString("image");
+                                    Bitmap newmap = stringToBitmap(map);
 
-    public ArrayList<PlanetCard> GetAll () {
-        getJson();
-        return planetCards;
+                                    Log.v(TAG, id + ":" + price + ":" + name);
+
+                                    planetCard = new PlanetCard(id, price, name, newmap);
+                                }
+                            }
+                            PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        VolleyLog.d(TAG, "Error" + error.getMessage());
+                        Toast.makeText(MainFragment.getMainFragment().getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
+        return planetCard;
     }
 
-
-    public void getJson() {
-
+    public ArrayList<PlanetCard> getAllProducts() {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 Base,null,
@@ -61,7 +96,7 @@ public class DataService {
                     for (int i = 0; i < response.length(); i++) {
                         // Get current json object
                         JSONObject planetCard = response.getJSONObject(i);
-                        int id = planetCard.getInt("id");
+                        Long id = (long)planetCard.getInt("id");
                         double price = planetCard.getDouble("price");
                         String name = planetCard.getString("name");
                         String map = planetCard.getString("image");
@@ -89,6 +124,7 @@ public class DataService {
                 }
         );
         RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
+        return planetCards;
     }
     private Bitmap stringToBitmap(String image) {
         byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);

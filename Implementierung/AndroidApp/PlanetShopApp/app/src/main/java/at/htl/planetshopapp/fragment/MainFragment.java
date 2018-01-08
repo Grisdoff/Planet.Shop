@@ -52,7 +52,7 @@ public class MainFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        PlanetAdapter listadapter = new PlanetAdapter(DataService.getInstance().GetAll());
+        PlanetAdapter listadapter = new PlanetAdapter(DataService.getInstance().getAllProducts());
         recyclerView.addItemDecoration(new Decorater(2,12,false));
         recyclerView.setAdapter(listadapter);
         return view;
