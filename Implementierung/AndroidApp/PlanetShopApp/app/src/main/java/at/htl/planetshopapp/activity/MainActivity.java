@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         MainFragment mainFragment = (MainFragment) getSupportFragmentManager().findFragmentById(R.id.main_container);
 
         if (mainFragment == null) {
-            mainFragment = MainFragment.newInstance("bla","blu");
+            mainFragment = MainFragment.newInstance();
             getSupportFragmentManager()
                     .beginTransaction()
                     .add(R.id.main_container,mainFragment)
