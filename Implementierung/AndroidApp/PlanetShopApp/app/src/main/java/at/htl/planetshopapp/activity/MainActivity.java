@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import at.htl.planetshopapp.R;
 import at.htl.planetshopapp.fragment.MainFragment;
+import at.htl.planetshopapp.fragment.PlanetCardDetailsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
