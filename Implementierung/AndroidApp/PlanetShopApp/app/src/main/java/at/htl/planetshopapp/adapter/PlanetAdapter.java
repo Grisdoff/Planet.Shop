@@ -4,10 +4,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import at.htl.planetshopapp.R;
+import at.htl.planetshopapp.activity.MainActivity;
 import at.htl.planetshopapp.entity.PlanetCard;
 import at.htl.planetshopapp.viewholder.PlanetViewHolder;
 
@@ -42,6 +44,8 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetViewHolder> {
     public void onBindViewHolder(PlanetViewHolder holder, int position) {
         final PlanetCard card = cardArrayList.get(position);
         holder.updateUI(card);
+
+        holder.itemView.setOnClickListener((view) -> MainActivity.getMainActivity().loadDetails(Long.parseLong(((TextView)view.findViewById(R.id.productIdHiddenView)).getText().toString())));
     }
 
     @Override

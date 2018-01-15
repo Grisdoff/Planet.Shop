@@ -11,12 +11,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.concurrent.Semaphore;
 
 import at.htl.planetshopapp.adapter.PlanetAdapter;
 import at.htl.planetshopapp.entity.PlanetCard;
@@ -28,7 +30,7 @@ import at.htl.planetshopapp.fragment.MainFragment;
 
 public class DataService {
     private static final String TAG = DataService.class.getSimpleName();
-    private static String Base = "http://10.0.2.2:8080/PlanetShop/rs/planet";
+    private static String BASE = "http://10.0.2.2:8080/planetshop/rs/planet";
     private ArrayList<PlanetCard> planetCards = new ArrayList<>();
     private PlanetCard planetCard;
 
@@ -39,31 +41,34 @@ public class DataService {
         return ourInstance;
     }
 
+    private final Object lock = new Object();
+
     private DataService() {
     }
 
     public PlanetCard getById(final Long searchId) {
-        String url = Base + "/getProductById/" + searchId;
-        final JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
+        String url = BASE + "/getProductById/" + searchId;
+        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,null,
-                new Response.Listener<JSONArray>() {
+                new Response.Listener<JSONObject>() {
                     @Override
-                    public void onResponse(JSONArray response) {
+                    public void onResponse(JSONObject response) {
                         try {
-                            JSONObject jsonObject = response.getJSONObject(0);
-                            Long id = (long)jsonObject.getInt("id");
-                            double price = jsonObject.getDouble("price");
-                            String name = jsonObject.getString("name");
-                            String description = jsonObject.getString("description");
-                            String map = jsonObject.getString("image");
+                            Long id = (long)response.getLong("id");
+                            double price = response.getDouble("price");
+                            String name = response.getString("name");
+                            String description = response.getString("description");
+                            String map = response.getString("image");
                             Bitmap newmap = stringToBitmap(map);
 
                             Log.v(TAG, id + ":" + price + ":" + name);
 
                             planetCard = new PlanetCard(id, price, name, newmap);
                             planetCard.setDescription(description);
-                            PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();
+                            synchronized (lock) {
+                                lock.notify();
+                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -75,15 +80,25 @@ public class DataService {
                         error.printStackTrace();
                         VolleyLog.d(TAG, "Error" + error.getMessage());
                         Toast.makeText(MainFragment.getMainFragment().getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                        synchronized (lock) {
+                            lock.notify();
+                        }
                     }
                 }
         );
         RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
+        synchronized (lock) {
+            try {
+                lock.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
         return planetCard;
     }
 
     public ArrayList<PlanetCard> getAllProducts() {
-        String url = Base + "/getAllProducts";
+        String url = BASE + "/getAllProducts";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,null,

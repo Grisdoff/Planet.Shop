@@ -8,6 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import at.htl.planetshopapp.R;
 import at.htl.planetshopapp.entity.PlanetCard;
 
@@ -19,12 +21,14 @@ public class PlanetViewHolder extends RecyclerView.ViewHolder {
     public ImageView imageView;
     public TextView price;
     public TextView name;
+    public TextView id;
     public PlanetViewHolder(View itemView) {
         super(itemView);
 
         price = (TextView) itemView.findViewById(R.id.price_text);
         name = (TextView)itemView.findViewById(R.id.name_text);
         imageView = (ImageView)itemView.findViewById(R.id.image_ID);
+        id = (TextView)itemView.findViewById(R.id.productIdHiddenView);
     }
 
     public void updateUI(PlanetCard card){
@@ -32,6 +36,7 @@ public class PlanetViewHolder extends RecyclerView.ViewHolder {
         price.setText(toPrice);
         name.setText(card.getName());
         imageView.setImageBitmap(card.getImageView());
+        id.setText(Long.toString(card.getId()));
     }
 }
 

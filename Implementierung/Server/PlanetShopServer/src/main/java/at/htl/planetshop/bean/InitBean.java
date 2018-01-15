@@ -21,8 +21,8 @@ public class InitBean {
     @PostConstruct
     public void init() throws IOException {
         System.out.println();
-        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("/home/robin/Windows_Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/Server/PlanetShopServer/testpicture.jpg")), "Sehr schoen oida");
-        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("/home/robin/Windows_Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/Server/PlanetShopServer/kleid.jpg")), "1x getragen");
+        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\testpicture.jpg")), "Sehr schoen oida");
+        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\Users\\Daniel\\Documents\\GitHub\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\kleid.jpg")), "1x getragen");
 
         productFacade.saveItem(card);
         productFacade.saveItem(card1);

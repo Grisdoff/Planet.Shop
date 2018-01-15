@@ -1,5 +1,6 @@
 package at.htl.planetshopapp.activity;
 
+import android.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -36,5 +37,9 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_container,mainFragment)
                     .commit();
         }
+    }
+
+    public void loadDetails(long productId) {
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container, PlanetCardDetailsFragment.newInstance(productId)).commit();
     }
 }
