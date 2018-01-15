@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.ws.rs.Produces;
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.util.Base64;
 import java.util.List;
 
 @Stateless
@@ -26,7 +27,12 @@ public class ProductFacade {
                 .getResultList();
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (Product p : products) {
-            jsonArrayBuilder.add(Json.createObjectBuilder().add("name", p.getName()).add("price", p.getPrice()).add("image", p.getImage().toString()));
+            JsonObjectBuilder productBuilder = Json.createObjectBuilder();
+            productBuilder.add("id", p.getId());
+            productBuilder.add("name", p.getName());
+            productBuilder.add("price", p.getPrice());
+            productBuilder.add("image", Base64.getEncoder().encodeToString(p.getImage()));
+            jsonArrayBuilder.add(productBuilder.build());
         }
         return jsonArrayBuilder.build();
     }
