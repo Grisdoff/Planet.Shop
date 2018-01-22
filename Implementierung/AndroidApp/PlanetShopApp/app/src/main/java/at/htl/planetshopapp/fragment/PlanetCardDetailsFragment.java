@@ -57,13 +57,13 @@ public class PlanetCardDetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setPlanetCardDetailsFragment(this);
-        View view = inflater.inflate(R.layout.fragment_main, container, false);
-        PlanetCard card = DataService.getInstance().getById(productId);
-        ((ImageView)view.findViewById(R.id.productImageView)).setImageBitmap(card.getImageView());
-        ((TextView)view.findViewById(R.id.productNameView)).setText(card.getName());
-        ((TextView)view.findViewById(R.id.productPriceView)).setText(Double.toString(card.getPrice()));
-        ((TextView)view.findViewById(R.id.productDescriptionView)).setText(card.getDescription());
-
+        View view = inflater.inflate(R.layout.fragment_detailspage, container, false);
+        DataService.getInstance().loadPlanetCard(productId, card -> {
+            ((ImageView)view.findViewById(R.id.productImageView)).setImageBitmap(card.getImageView());
+            ((TextView)view.findViewById(R.id.productNameView)).setText(card.getName());
+            ((TextView)view.findViewById(R.id.productPriceView)).setText(Double.toString(card.getPrice()) + '€');
+            ((TextView)view.findViewById(R.id.productDescriptionView)).setText(card.getDescription());
+        });
         return view;
     }
 }
