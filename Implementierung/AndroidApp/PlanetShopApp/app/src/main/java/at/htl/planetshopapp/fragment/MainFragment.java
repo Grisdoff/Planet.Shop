@@ -2,6 +2,7 @@ package at.htl.planetshopapp.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -46,16 +47,17 @@ public class MainFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
 
 
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_container);
+        final RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.recyclerview_container);
         recyclerView.setHasFixedSize(true);
-
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        PlanetAdapter listadapter = new PlanetAdapter(DataService.getInstance().getAllProducts());
-        recyclerView.addItemDecoration(new Decorater(2,12,false));
-        recyclerView.setAdapter(listadapter);
+        DataService.getInstance().loadAllProducts(it -> {
+            PlanetAdapter listadapter = new PlanetAdapter(it);
+            recyclerView.addItemDecoration(new Decorater(2,12,false));
+            recyclerView.setAdapter(listadapter);
+        });
+
         return view;
     }
-
 }

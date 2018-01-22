@@ -2,6 +2,8 @@ package at.htl.planetshopapp.service;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -12,14 +14,19 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.Semaphore;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
+import at.htl.planetshopapp.activity.MainActivity;
 import at.htl.planetshopapp.adapter.PlanetAdapter;
 import at.htl.planetshopapp.entity.PlanetCard;
 import at.htl.planetshopapp.fragment.MainFragment;
@@ -31,8 +38,8 @@ import at.htl.planetshopapp.fragment.MainFragment;
 public class DataService {
     private static final String TAG = DataService.class.getSimpleName();
     private static String BASE = "http://10.0.2.2:8080/planetshop/rs/planet";
-    private ArrayList<PlanetCard> planetCards = new ArrayList<>();
-    private PlanetCard planetCard;
+//    private ArrayList<PlanetCard> planetCards = new ArrayList<>();
+//    private PlanetCard planetCard;
 
 
     private static final DataService ourInstance = new DataService();
@@ -46,12 +53,13 @@ public class DataService {
     private DataService() {
     }
 
-    public PlanetCard getById(final Long searchId) {
+    public void loadPlanetCard(final Long searchId, final Consumer<PlanetCard> callback) {
         String url = BASE + "/getProductById/" + searchId;
-        final JsonObjectRequest jsonArrayRequest = new JsonObjectRequest(
+        final JsonObjectRequest productDetailsRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,null,
                 new Response.Listener<JSONObject>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
@@ -64,11 +72,9 @@ public class DataService {
 
                             Log.v(TAG, id + ":" + price + ":" + name);
 
-                            planetCard = new PlanetCard(id, price, name, newmap);
+                            PlanetCard planetCard = new PlanetCard(id, price, name, newmap);
                             planetCard.setDescription(description);
-                            synchronized (lock) {
-                                lock.notify();
-                            }
+                            callback.accept(planetCard);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -80,33 +86,35 @@ public class DataService {
                         error.printStackTrace();
                         VolleyLog.d(TAG, "Error" + error.getMessage());
                         Toast.makeText(MainFragment.getMainFragment().getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                        synchronized (lock) {
-                            lock.notify();
-                        }
+//                        synchronized (lock) {
+//                            lock.notify();
+//                        }
                     }
                 }
         );
-        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
-        synchronized (lock) {
-            try {
-                lock.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        return planetCard;
+        //Volley.newRequestQueue(MainActivity.getMainActivity()).add(productDetailsRequest);
+        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(productDetailsRequest);
+//        synchronized (lock) {
+//            try {
+//                lock.wait();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
-    public ArrayList<PlanetCard> getAllProducts() {
+    public void loadAllProducts(final Consumer<List<PlanetCard>> callback) {
         String url = BASE + "/getAllProducts";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,null,
                 new Response.Listener<JSONArray>() {
+            @RequiresApi(api = Build.VERSION_CODES.N)
             @Override
             public void onResponse(JSONArray response) {
                 try {
                     // Loop through the array elements
+                    List<PlanetCard> planetCards = new ArrayList<>();
                     for (int i = 0; i < response.length(); i++) {
                         // Get current json object
                         JSONObject planetCard = response.getJSONObject(i);
@@ -121,7 +129,9 @@ public class DataService {
                         planetCards.add(
                                 new PlanetCard(id, price, name, newmap)
                         );
+
                     }
+                    callback.accept(planetCards);
                     PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -138,7 +148,7 @@ public class DataService {
                 }
         );
         RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
-        return planetCards;
+        //return planetCards;
     }
     private Bitmap stringToBitmap(String image) {
         byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);

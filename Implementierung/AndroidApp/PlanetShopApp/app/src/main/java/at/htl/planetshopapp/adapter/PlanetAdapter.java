@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import at.htl.planetshopapp.R;
 import at.htl.planetshopapp.activity.MainActivity;
@@ -18,7 +19,7 @@ import at.htl.planetshopapp.viewholder.PlanetViewHolder;
  */
 
 public class PlanetAdapter extends RecyclerView.Adapter<PlanetViewHolder> {
-    ArrayList<PlanetCard> cardArrayList = new ArrayList<>();
+    List<PlanetCard> cardArrayList = new ArrayList<>();
     public static PlanetAdapter mplanetAdapter;
 
     public static PlanetAdapter getMplanetAdapter() {
@@ -29,7 +30,7 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetViewHolder> {
         PlanetAdapter.mplanetAdapter = mplanetAdapter;
     }
 
-    public PlanetAdapter(ArrayList<PlanetCard> cardArrayList) {
+    public PlanetAdapter(List<PlanetCard> cardArrayList) {
         this.cardArrayList = cardArrayList;
         PlanetAdapter.setMplanetAdapter(this);
     }
@@ -45,8 +46,11 @@ public class PlanetAdapter extends RecyclerView.Adapter<PlanetViewHolder> {
         final PlanetCard card = cardArrayList.get(position);
         holder.updateUI(card);
 
+
         holder.itemView.setOnClickListener((view) -> MainActivity.getMainActivity().loadDetails(Long.parseLong(((TextView)view.findViewById(R.id.productIdHiddenView)).getText().toString())));
     }
+
+
 
     @Override
     public int getItemCount() {

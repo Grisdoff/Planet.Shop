@@ -33,7 +33,7 @@ public class PlanetViewHolder extends RecyclerView.ViewHolder {
 
     public void updateUI(PlanetCard card){
         String toPrice = new Double(card.getPrice()).toString();
-        price.setText(toPrice);
+        price.setText(toPrice + '€');
         name.setText(card.getName());
         imageView.setImageBitmap(card.getImageView());
         id.setText(Long.toString(card.getId()));
