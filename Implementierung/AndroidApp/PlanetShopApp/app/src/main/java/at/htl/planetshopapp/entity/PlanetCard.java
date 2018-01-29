@@ -13,10 +13,14 @@ public class PlanetCard {
     private String name;
     private Bitmap imageView;
     private String description;
-    private Integer itemcount;
+    private Integer itemCount;
 
     //region Constructors
     public PlanetCard() {
+    }
+
+    public PlanetCard(Long id) {
+        this.id = id;
     }
 
     public PlanetCard(Long id, double price, String name, Bitmap imageView) {
@@ -65,11 +69,11 @@ public class PlanetCard {
     }
 
     public Integer getItemCount() {
-        return itemcount;
+        return itemCount;
     }
 
     public void setItemCount(Integer itemcount) {
-        this.itemcount = itemcount;
+        this.itemCount = itemcount;
     }
     //endregion
 }

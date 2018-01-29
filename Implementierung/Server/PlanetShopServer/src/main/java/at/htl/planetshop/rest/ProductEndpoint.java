@@ -12,6 +12,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
+import java.util.Arrays;
 import java.util.List;
 
 @Path("planet")
@@ -31,6 +32,13 @@ public class ProductEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public Product getProductDetails(@PathParam("id") Long id) {
         return productFacade.findById(id);
+    }
+
+    @GET
+    @Path("getProductsByIds")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonArray getProductsByIds(@javax.ws.rs.QueryParam(value = "ids") List<Long> ids) {
+        return productFacade.getProductsByIds(ids);
     }
 
     @POST

@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import at.htl.planetshopapp.R;
+import at.htl.planetshopapp.fragment.EditShoppingCartFragment;
 import at.htl.planetshopapp.fragment.MainFragment;
 import at.htl.planetshopapp.fragment.PlanetCardDetailsFragment;
+import at.htl.planetshopapp.persistence.ShoppingCartFacade;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,9 +39,14 @@ public class MainActivity extends AppCompatActivity {
                     .add(R.id.main_container,mainFragment)
                     .commit();
         }
+        ShoppingCartFacade.setShoppingCartFacade(new ShoppingCartFacade(this.getApplicationContext()));
     }
 
     public void loadDetails(long productId) {
         getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container, PlanetCardDetailsFragment.newInstance(productId)).commit();
+    }
+
+    public void loadShoppingCart() {
+        getSupportFragmentManager().beginTransaction().addToBackStack(null).replace(R.id.main_container, EditShoppingCartFragment.newInstance()).commit();
     }
 }

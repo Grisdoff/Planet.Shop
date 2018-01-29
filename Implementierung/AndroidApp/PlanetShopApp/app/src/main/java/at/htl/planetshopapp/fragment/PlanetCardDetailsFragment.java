@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import at.htl.planetshopapp.R;
-import at.htl.planetshopapp.entity.PlanetCard;
+import at.htl.planetshopapp.activity.MainActivity;
+import at.htl.planetshopapp.persistence.ShoppingCartFacade;
 import at.htl.planetshopapp.service.DataService;
 
 /**
@@ -59,10 +60,24 @@ public class PlanetCardDetailsFragment extends Fragment {
         setPlanetCardDetailsFragment(this);
         View view = inflater.inflate(R.layout.fragment_detailspage, container, false);
         DataService.getInstance().loadPlanetCard(productId, card -> {
-            ((ImageView)view.findViewById(R.id.productImageView)).setImageBitmap(card.getImageView());
-            ((TextView)view.findViewById(R.id.productNameView)).setText(card.getName());
-            ((TextView)view.findViewById(R.id.productPriceView)).setText(Double.toString(card.getPrice()) + '€');
-            ((TextView)view.findViewById(R.id.productDescriptionView)).setText(card.getDescription());
+            ((ImageView)view.findViewById(R.id.image_view)).setImageBitmap(card.getImageView());
+            ((TextView)view.findViewById(R.id.name_text)).setText(card.getName());
+            ((TextView)view.findViewById(R.id.price_text)).setText(Double.toString(card.getPrice()) + '€');
+            ((TextView)view.findViewById(R.id.product_description_view)).setText(card.getDescription());
+            ((TextView)view.findViewById(R.id.product_id_hidden_view)).setText(Long.toString(card.getId()));
+        });
+
+        view.findViewById(R.id.add_to_shopping_cart_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShoppingCartFacade.getShoppingCartFacade().incrementItemCountOf(productId);
+            }
+        });
+        view.findViewById(R.id.shopping_cart_button).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.getMainActivity().loadShoppingCart();
+            }
         });
         return view;
     }

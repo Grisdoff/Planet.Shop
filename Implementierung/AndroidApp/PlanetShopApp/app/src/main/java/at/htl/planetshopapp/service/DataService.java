@@ -14,7 +14,6 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -22,12 +21,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Semaphore;
 import java.util.function.Consumer;
-import java.util.function.Function;
 
-import at.htl.planetshopapp.activity.MainActivity;
-import at.htl.planetshopapp.adapter.PlanetAdapter;
+import at.htl.planetshopapp.adapter.MainFragmentPlanetCardAdapter;
 import at.htl.planetshopapp.entity.PlanetCard;
 import at.htl.planetshopapp.fragment.MainFragment;
 
@@ -103,6 +99,55 @@ public class DataService {
 //        }
     }
 
+    public void loadPlanetCards(final List<Long> ids, final Consumer<List<PlanetCard>> callback) {
+        StringBuilder urlBuilder = new StringBuilder(BASE + "/getProductsByIds?");
+        for (Long id: ids) {
+            urlBuilder.append("ids=").append(id).append('&');
+        }
+
+        final JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                urlBuilder.toString(),
+                null,
+                new Response.Listener<JSONArray>() {
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            List<PlanetCard> planetCards = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject planetCard = response.getJSONObject(i);
+                                Long id = (long) planetCard.getInt("id");
+                                double price = planetCard.getDouble("price");
+                                String name = planetCard.getString("name");
+                                String map = planetCard.getString("image");
+                                Bitmap newmap = stringToBitmap(map);
+
+                                Log.v(TAG, id + ":" + price + ":" + name);
+
+                                planetCards.add(
+                                        new PlanetCard(id, price, name, newmap)
+                                );
+
+                            }
+                            callback.accept(planetCards);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                        VolleyLog.d(TAG, "Error" + error.getMessage());
+                        Toast.makeText(MainFragment.getMainFragment().getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                });
+        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(request);
+    }
+
     public void loadAllProducts(final Consumer<List<PlanetCard>> callback) {
         String url = BASE + "/getAllProducts";
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
@@ -132,7 +177,7 @@ public class DataService {
 
                     }
                     callback.accept(planetCards);
-                    PlanetAdapter.getMplanetAdapter().notifyDataSetChanged();
+                    MainFragmentPlanetCardAdapter.getPlanetCardAdapter().notifyDataSetChanged();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

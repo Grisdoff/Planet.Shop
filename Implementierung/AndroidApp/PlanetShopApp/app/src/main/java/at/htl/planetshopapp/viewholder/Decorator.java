@@ -8,13 +8,13 @@ import android.view.View;
  * Created by Patrick on 18.12.2017.
  */
 
-public class Decorater extends RecyclerView.ItemDecoration {
+public class Decorator extends RecyclerView.ItemDecoration {
 
     private int spanCount;
     private int spacing;
     private boolean includeEdge;
 
-    public Decorater(int spanCount, int spacing, boolean includeEdge) {
+    public Decorator(int spanCount, int spacing, boolean includeEdge) {
         this.spanCount = spanCount;
         this.spacing = spacing;
         this.includeEdge = includeEdge;

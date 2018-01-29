@@ -11,6 +11,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.Base64;
 import java.util.List;
+import java.util.function.Supplier;
 
 @Stateless
 public class ProductFacade {
@@ -27,12 +28,7 @@ public class ProductFacade {
                 .getResultList();
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (Product p : products) {
-            JsonObjectBuilder productBuilder = Json.createObjectBuilder();
-            productBuilder.add("id", p.getId());
-            productBuilder.add("name", p.getName());
-            productBuilder.add("price", p.getPrice());
-            productBuilder.add("image", Base64.getEncoder().encodeToString(p.getImage()));
-            jsonArrayBuilder.add(productBuilder.build());
+            jsonArrayBuilder.add(buildSimpleProductJson(p));
         }
         return jsonArrayBuilder.build();
     }
@@ -44,5 +40,23 @@ public class ProductFacade {
 
     public Product findById(Long id) {
         return this.entityManager.find(Product.class, id);
+    }
+
+    public JsonArray getProductsByIds(List<Long> ids) {
+        return ids.stream()
+                .map(it -> findById(it))
+                .collect(() -> Json.createArrayBuilder(),
+                        (builder, product) -> builder.add(buildSimpleProductJson(product)),
+                        (b1, b2) -> b1.addAll(b2))
+                .build();
+    }
+
+    private JsonObject buildSimpleProductJson(Product p) {
+        JsonObjectBuilder productBuilder = Json.createObjectBuilder();
+        productBuilder.add("id", p.getId());
+        productBuilder.add("name", p.getName());
+        productBuilder.add("price", p.getPrice());
+        productBuilder.add("image", Base64.getEncoder().encodeToString(p.getImage()));
+        return productBuilder.build();
     }
 }

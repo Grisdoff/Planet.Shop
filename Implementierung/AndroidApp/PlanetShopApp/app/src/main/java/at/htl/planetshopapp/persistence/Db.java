@@ -13,7 +13,7 @@ public class Db extends SQLiteOpenHelper{
     private static final String DATABASE_NAME = "PlanetShopDb";
     protected static final String TABLE_NAME = "SHOPPINGCART";
 
-    public static final String CREATE_TABLE = "create table if not exists "
+    protected static final String CREATE_TABLE = "create table if not exists "
             + TABLE_NAME
             + " (ID integer primary key autoincrement, ITEMCOUNT integer NOT NULL);";
 

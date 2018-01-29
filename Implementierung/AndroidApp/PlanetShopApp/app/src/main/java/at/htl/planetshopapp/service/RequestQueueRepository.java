@@ -27,7 +27,7 @@ public class RequestQueueRepository {
 
     /**
      * Aufrufen mit
-     * <code>RequestQueueRepository.getInstance(this).addToRequestQueue(stringRequest);</code>
+     * <code>RequestQueueRepository.getPlanetCardAdapter(this).addToRequestQueue(stringRequest);</code>
      * @param context
      * @return
      */

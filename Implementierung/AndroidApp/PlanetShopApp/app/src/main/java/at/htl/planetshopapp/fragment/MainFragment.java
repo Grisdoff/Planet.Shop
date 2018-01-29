@@ -2,7 +2,6 @@ package at.htl.planetshopapp.fragment;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,11 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import at.htl.planetshopapp.activity.MainActivity;
 import at.htl.planetshopapp.R;
 import at.htl.planetshopapp.service.DataService;
-import at.htl.planetshopapp.adapter.PlanetAdapter;
-import at.htl.planetshopapp.viewholder.Decorater;
+import at.htl.planetshopapp.adapter.MainFragmentPlanetCardAdapter;
+import at.htl.planetshopapp.viewholder.Decorator;
 
 public class MainFragment extends Fragment {
     private static MainFragment mainFragment;
@@ -53,8 +51,8 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         DataService.getInstance().loadAllProducts(it -> {
-            PlanetAdapter listadapter = new PlanetAdapter(it);
-            recyclerView.addItemDecoration(new Decorater(2,12,false));
+            MainFragmentPlanetCardAdapter listadapter = new MainFragmentPlanetCardAdapter(it);
+            recyclerView.addItemDecoration(new Decorator(2,12,false));
             recyclerView.setAdapter(listadapter);
         });
 
