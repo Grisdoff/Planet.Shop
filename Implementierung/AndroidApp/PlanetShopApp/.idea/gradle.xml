@@ -7,8 +7,8 @@
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
-            <option value="/media/robin/989881DA9881B772/Users/Robin/Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/AndroidApp/PlanetShopApp" />
-            <option value="/media/robin/989881DA9881B772/Users/Robin/Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/AndroidApp/PlanetShopApp/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
