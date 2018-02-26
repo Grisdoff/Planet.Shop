@@ -24,7 +24,7 @@ public class ProductFacade {
 
     public JsonArray getAllProducts(){ //nur price name und image
         List<Product> products = this.entityManager
-                .createNamedQuery("findAll",Product.class)
+                .createNamedQuery("Product.findAll",Product.class)
                 .getResultList();
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         for (Product p : products) {
@@ -58,5 +58,16 @@ public class ProductFacade {
         productBuilder.add("price", p.getPrice());
         productBuilder.add("image", Base64.getEncoder().encodeToString(p.getImage()));
         return productBuilder.build();
+    }
+
+    public JsonArray getFilteredProducts(String filter) {
+        JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
+        List<Product> thelist = entityManager.createNamedQuery("Product.filter", Product.class).setParameter("filter", "%" + filter.toUpperCase() + "%").getResultList();
+        thelist.stream().forEach(r -> arrayBuilder.add(Json.createObjectBuilder()
+                .add("id", r.getId())
+                .add("name", r.getName())
+                .add("price", r.getPrice())
+                .add("image", Base64.getEncoder().encodeToString(r.getImage()))));
+        return arrayBuilder.build();
     }
 }

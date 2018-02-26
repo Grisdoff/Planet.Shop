@@ -4,6 +4,7 @@ import at.htl.planetshop.entities.Product;
 import at.htl.planetshop.business.ProductFacade;
 
 import javax.inject.Inject;
+import javax.json.Json;
 import javax.json.JsonArray;
 import javax.json.JsonArrayBuilder;
 import javax.ws.rs.*;
@@ -47,5 +48,12 @@ public class ProductEndpoint {
         Long id = (long) saved.getId();
         URI uri = uriInfo.getAbsolutePathBuilder().path("/"+ id).build();
         return Response.created(uri).build();
+    }
+
+    @GET
+    @Path("filter/{filter}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public JsonArray filter(@PathParam("filter") String filter){
+        return productFacade.getFilteredProducts(filter);
     }
 }
