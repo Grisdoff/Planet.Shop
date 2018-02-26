@@ -5,6 +5,7 @@ android:layout_height="match_parent"
 tools:context="at.htl.planetshopapp.fragment.MainFragment">
 
 <!-- TODO: Update blank fragment layout -->
-<include layout="@layout/recyclerview_container"/>
+
+    <include layout="@layout/recyclerview_container"/>
 
 </FrameLayout>
