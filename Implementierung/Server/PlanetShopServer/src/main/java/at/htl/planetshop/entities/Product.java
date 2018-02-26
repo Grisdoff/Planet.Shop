@@ -7,7 +7,8 @@ import java.io.Serializable;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @NamedQueries({
-        @NamedQuery(name = "findAll",query = "select v from Product v")
+        @NamedQuery(name = "Product.findAll",query = "select v from Product v"),
+        @NamedQuery(name = "Product.filter", query = "select v from Product v where upper(v.name) like :filter")
 })
 @XmlRootElement
 public class Product implements Serializable{
