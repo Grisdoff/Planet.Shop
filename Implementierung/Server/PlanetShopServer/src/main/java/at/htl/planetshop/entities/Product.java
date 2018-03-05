@@ -1,6 +1,10 @@
 package at.htl.planetshop.entities;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 
@@ -15,14 +19,21 @@ public class Product implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull(message = "No price given")
     private double price;
+
+    @Column(name = "name")
+    @Size(min = 5, max = 50, message = "Given name too long or too short")
     private String name;
+
     @Lob
+    @NotNull
     private byte[] image;
 
     @Basic(fetch = FetchType.LAZY)
     private String description;
-//price not null, name zwischen 5 und 50, image not null
+
     //region Constructors
     public Product(double price, String name) {
         this.price = price;
