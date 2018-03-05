@@ -23,9 +23,11 @@ public class InitBean {
         System.out.println();
         Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\testpicture.jpg")), "Sehr schoen oida");
         Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\kleid.jpg")), "1x getragen");
+        Product card2 = new Product(1337, "Neuwertiger Kebap", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\kebap.jpg")), "1x gegessen");
 
         productFacade.saveItem(card);
         productFacade.saveItem(card1);
+        productFacade.saveItem(card2);
     }
 
 }
