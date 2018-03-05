@@ -21,9 +21,9 @@ public class InitBean {
     @PostConstruct
     public void init() throws IOException {
         System.out.println();
-        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\testpicture.jpg")), "Sehr schoen oida");
-        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\kleid.jpg")), "1x getragen");
-        Product card2 = new Product(1337, "Neuwertiger Kebap", Files.readAllBytes(Paths.get("C:\\Users\\David\\Documents\\Planet.Shop\\Planet.Shop\\Implementierung\\Server\\PlanetShopServer\\kebap.jpg")), "1x gegessen");
+        Product card = new Product(14,"Schuhe", Files.readAllBytes(Paths.get("/home/robin/Windows_Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/Server/PlanetShopServer/testpicture.jpg")), "Sehr schoen oida");
+        Product card1 = new Product(57, "Tolles Kleid", Files.readAllBytes(Paths.get("/home/robin/Windows_Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/Server/PlanetShopServer/kleid.jpg")), "1x getragen");
+        Product card2 = new Product(1337, "Neuwertiger Kebap", Files.readAllBytes(Paths.get("/home/robin/Windows_Desktop/Schule/SYP/PlanettShopAktuell/Planet.Shop/Implementierung/Server/PlanetShopServer/kebap.jpg")), "1x gegessen");
 
         productFacade.saveItem(card);
         productFacade.saveItem(card1);

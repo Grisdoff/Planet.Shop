@@ -18,10 +18,12 @@ public class User implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    //Username size has to be between 6 and 12 characters
     @Size(min = 6, max = 12, message = "Username too long or too short")
     private String username;
 
-    @Min(value = 6)
+    //@Min(value = 6) Why min?
+    @Size(min = 6, max = 12)
     @Pattern(regexp = "")
     private String password;
 //username zwischen 6 und 12, password muss 1x groß, 1x, 1x Zahl mindestens
