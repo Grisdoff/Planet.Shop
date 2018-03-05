@@ -6,8 +6,9 @@ import java.io.Serializable;
 @Entity
 @Table(name = "USER_DATA")
 @NamedQueries({
-        @NamedQuery(name = "User.getWithUsernameAndPassword", query = "select u from User u where u.username = :username and u.password = :password"),
-        @NamedQuery(name = "User.deleteById", query = "delete from User u where u.id = :id")
+        @NamedQuery(name = "User.getByUsernameAndPassword", query = "select u from User u where u.username = :username and u.password = :password"),
+        @NamedQuery(name = "User.deleteByUsername", query = "delete from User u where u.username = :username"),
+        @NamedQuery(name = "User.getByUsername", query = "select u from User u where u.username = :username")
 })
 public class User implements Serializable {
     @Id
@@ -15,7 +16,7 @@ public class User implements Serializable {
     private Long id;
     private String username;
     private String password;
-
+//username zwischen 6 und 12, password muss 1x groß, 1x, 1x Zahl mindestens
     //region Constructors
     public User(){
 

@@ -22,7 +22,8 @@ public class ProductFacade {
     public ProductFacade() {
     }
 
-    public JsonArray getAllProducts(){ //nur price name und image
+    //sende all Products
+    public JsonArray getAllProducts(){
         List<Product> products = this.entityManager
                 .createNamedQuery("Product.findAll",Product.class)
                 .getResultList();
@@ -33,11 +34,13 @@ public class ProductFacade {
         return jsonArrayBuilder.build();
     }
 
+    //save this Product
     public Product saveItem(Product card) {
         entityManager.persist(card);
         return card;
     }
 
+    //find a Product by Id
     public Product findById(Long id) {
         return this.entityManager.find(Product.class, id);
     }
@@ -51,6 +54,7 @@ public class ProductFacade {
                 .build();
     }
 
+    //convert a Product in JSON-Format
     private JsonObject buildSimpleProductJson(Product p) {
         JsonObjectBuilder productBuilder = Json.createObjectBuilder();
         productBuilder.add("id", p.getId());
@@ -60,6 +64,7 @@ public class ProductFacade {
         return productBuilder.build();
     }
 
+    //return all Product that match the filter
     public JsonArray getFilteredProducts(String filter) {
         JsonArrayBuilder arrayBuilder = Json.createArrayBuilder();
         List<Product> thelist = entityManager.createNamedQuery("Product.filter", Product.class).setParameter("filter", "%" + filter.toUpperCase() + "%").getResultList();

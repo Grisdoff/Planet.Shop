@@ -16,11 +16,12 @@ import java.net.URI;
 import java.util.Arrays;
 import java.util.List;
 
-@Path("planet")
+@Path("product")
 public class ProductEndpoint {
     @Inject
     private ProductFacade productFacade;
 
+    //return all Products
     @GET
     @Path("getAllProducts")
     @Produces(MediaType.APPLICATION_JSON)
@@ -28,6 +29,7 @@ public class ProductEndpoint {
         return productFacade.getAllProducts();
     }
 
+    //return Product with matches with id
     @GET
     @Path("getProductById/{id}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,6 +37,7 @@ public class ProductEndpoint {
         return productFacade.findById(id);
     }
 
+    //return List of Product with matches one of the sent ids
     @GET
     @Path("getProductsByIds")
     @Produces(MediaType.APPLICATION_JSON)
@@ -42,6 +45,7 @@ public class ProductEndpoint {
         return productFacade.getProductsByIds(ids);
     }
 
+    //save a Product
     @POST
     public Response save(Product card, @Context UriInfo uriInfo) {
         Product saved = this.productFacade.saveItem(card);
@@ -50,6 +54,7 @@ public class ProductEndpoint {
         return Response.created(uri).build();
     }
 
+    //filter
     @GET
     @Path("filter/{filter}")
     @Produces(MediaType.APPLICATION_JSON)

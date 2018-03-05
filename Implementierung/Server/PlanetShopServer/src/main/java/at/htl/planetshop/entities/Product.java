@@ -22,14 +22,14 @@ public class Product implements Serializable{
 
     @Basic(fetch = FetchType.LAZY)
     private String description;
-
-    public Product() {
-    }
-
+//price not null, name zwischen 5 und 50, image not null
     //region Constructors
     public Product(double price, String name) {
         this.price = price;
         this.name = name;
+    }
+
+    public Product() {
     }
 
     public Product(double price, String name, byte[] image, String description) {
