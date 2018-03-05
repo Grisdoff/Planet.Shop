@@ -51,6 +51,7 @@ public class DataService {
 
     public void loadPlanetCard(final Long searchId, final Consumer<PlanetCard> callback) {
         String url = BASE + "/getProductById/" + searchId;
+
         final JsonObjectRequest productDetailsRequest = new JsonObjectRequest(
                 Request.Method.GET,
                 url,null,
@@ -96,7 +97,7 @@ public class DataService {
 //            } catch (InterruptedException e) {
 //                e.printStackTrace();
 //            }
-//        }
+//        }*/
     }
 
     public void loadPlanetCards(final List<Long> ids, final Consumer<List<PlanetCard>> callback) {
@@ -104,7 +105,8 @@ public class DataService {
         for (Long id: ids) {
             urlBuilder.append("ids=").append(id).append('&');
         }
-
+        getProducts(urlBuilder.toString(), callback);
+        /*
         final JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 urlBuilder.toString(),
@@ -145,7 +147,7 @@ public class DataService {
                         Toast.makeText(MainFragment.getMainFragment().getActivity(), error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(request);
+        RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(request);*/
     }
 
     public void loadAllProducts(final Consumer<List<PlanetCard>> callback) {
