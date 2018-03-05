@@ -33,7 +33,7 @@ import at.htl.planetshopapp.fragment.MainFragment;
 
 public class DataService {
     private static final String TAG = DataService.class.getSimpleName();
-    private static String BASE = "http://10.0.2.2:8080/planetshop/rs/planet";
+    private static String BASE = "http://10.0.2.2:8080/planetshop/rs/product";
 //    private ArrayList<PlanetCard> planetCards = new ArrayList<>();
 //    private PlanetCard planetCard;
 
@@ -150,39 +150,43 @@ public class DataService {
 
     public void loadAllProducts(final Consumer<List<PlanetCard>> callback) {
         String url = BASE + "/getAllProducts";
+        getProducts(url, callback);
+    }
+
+    public void getProducts(String url, final Consumer<List<PlanetCard>> callback){
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
                 url,null,
                 new Response.Listener<JSONArray>() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onResponse(JSONArray response) {
-                try {
-                    // Loop through the array elements
-                    List<PlanetCard> planetCards = new ArrayList<>();
-                    for (int i = 0; i < response.length(); i++) {
-                        // Get current json object
-                        JSONObject planetCard = response.getJSONObject(i);
-                        Long id = (long)planetCard.getInt("id");
-                        double price = planetCard.getDouble("price");
-                        String name = planetCard.getString("name");
-                        String map = planetCard.getString("image");
-                        Bitmap newmap = stringToBitmap(map);
+                    @RequiresApi(api = Build.VERSION_CODES.N)
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        try {
+                            // Loop through the array elements
+                            List<PlanetCard> planetCards = new ArrayList<>();
+                            for (int i = 0; i < response.length(); i++) {
+                                // Get current json object
+                                JSONObject planetCard = response.getJSONObject(i);
+                                Long id = (long)planetCard.getInt("id");
+                                double price = planetCard.getDouble("price");
+                                String name = planetCard.getString("name");
+                                String map = planetCard.getString("image");
+                                Bitmap newmap = stringToBitmap(map);
 
-                        Log.v(TAG, id + ":" + price + ":" + name);
+                                Log.v(TAG, id + ":" + price + ":" + name);
 
-                        planetCards.add(
-                                new PlanetCard(id, price, name, newmap)
-                        );
+                                planetCards.add(
+                                        new PlanetCard(id, price, name, newmap)
+                                );
 
+                            }
+                            callback.accept(planetCards);
+                            MainFragmentPlanetCardAdapter.getPlanetCardAdapter().notifyDataSetChanged();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
-                    callback.accept(planetCards);
-                    MainFragmentPlanetCardAdapter.getPlanetCardAdapter().notifyDataSetChanged();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        },
+                },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
@@ -194,6 +198,12 @@ public class DataService {
         );
         RequestQueueRepository.getInstance(MainFragment.getMainFragment().getActivity()).addToRequestQueue(jsonArrayRequest);
         //return planetCards;
+    }
+
+    public void filterProducts(String filter, final Consumer<List<PlanetCard>> callback){
+        String url = BASE + "/filter/" + filter;
+        getProducts(url, callback);
+
     }
     private Bitmap stringToBitmap(String image) {
         byte [] encodeByte= Base64.decode(image,Base64.DEFAULT);
