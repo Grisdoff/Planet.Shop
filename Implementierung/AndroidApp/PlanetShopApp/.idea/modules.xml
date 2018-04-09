@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://C:\Users\David\Documents\Planet.Shop\Planet.Shop\Implementierung\AndroidApp\PlanetShopApp\AndroidApp-PlanetShopApp.iml" filepath="C:\Users\David\Documents\Planet.Shop\Planet.Shop\Implementierung\AndroidApp\PlanetShopApp\AndroidApp-PlanetShopApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/PlanetShopApp.iml" filepath="$PROJECT_DIR$/PlanetShopApp.iml" />
       <module fileurl="file://C:\Users\David\Desktop\Planet.Shop-master\Implementierung\AndroidApp\PlanetShopApp\PlanetShopApp.iml" filepath="C:\Users\David\Desktop\Planet.Shop-master\Implementierung\AndroidApp\PlanetShopApp\PlanetShopApp.iml" />
+      <module fileurl="file://C:\Users\David\Documents\Planet.Shop\Planet.Shop\Implementierung\AndroidApp\PlanetShopApp\app\PlanetShopApp-app.iml" filepath="C:\Users\David\Documents\Planet.Shop\Planet.Shop\Implementierung\AndroidApp\PlanetShopApp\app\PlanetShopApp-app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://C:\Users\David\Desktop\Planet.Shop-master\Implementierung\AndroidApp\PlanetShopApp\app\app.iml" filepath="C:\Users\David\Desktop\Planet.Shop-master\Implementierung\AndroidApp\PlanetShopApp\app\app.iml" />
     </modules>

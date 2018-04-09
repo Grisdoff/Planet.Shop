@@ -20,6 +20,9 @@ public class Product implements Serializable{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    private Long numberOfPcs;
+
     @NotNull(message = "No price given")
     private double price;
 
@@ -43,11 +46,12 @@ public class Product implements Serializable{
     public Product() {
     }
 
-    public Product(double price, String name, byte[] image, String description) {
+    public Product(double price, String name, byte[] image, String description, Long numberOfPcs) {
         this.price = price;
         this.name = name;
         this.image = image;
         this.description = description;
+        this.numberOfPcs = numberOfPcs;
     }
     //endregion
 
