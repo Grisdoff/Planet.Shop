@@ -69,6 +69,7 @@ public class MainFragment extends Fragment {
             }
         });
 
+
         view.findViewById(R.id.login_button).setOnClickListener(v -> MainActivity.getMainActivity().loadLoginFragment());
 
         SearchView searchView = view.findViewById(R.id.search_bar);
