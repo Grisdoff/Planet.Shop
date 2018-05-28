@@ -1,5 +1,7 @@
 package at.htl.planetshopapp.fragment;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -71,6 +73,18 @@ public class PlanetCardDetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ShoppingCartFacade.getShoppingCartFacade().incrementItemCountOf(productId);
+            }
+        });
+
+        view.findViewById(R.id.contactSellerBtn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                Uri data = Uri.parse("mailto:"
+                        + "test@test.com"
+                        + "?subject=" + "Kaufanfrage" + "&body=" + "");
+                intent.setData(data);
+                startActivity(intent);
             }
         });
         view.findViewById(R.id.shopping_cart_button).setOnClickListener(new View.OnClickListener() {

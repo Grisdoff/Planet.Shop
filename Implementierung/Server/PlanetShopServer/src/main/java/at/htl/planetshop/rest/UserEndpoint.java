@@ -14,31 +14,15 @@ public class UserEndpoint {
     @Inject
     private UserFacade userFacade;
 
-    //check Login Datas
-    @GET
-    @Path("tryLogin/{username}/{password}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean checkUserLogin(@PathParam("username")String username, @PathParam("password")String password) {
-        return userFacade.checkUserLogin(username, password);
-    }
-
     //add a User
-    @Path("addUser/{username}/{password}")
-    public void addUser(@PathParam("username") String username, @PathParam("password") String password) {
-        userFacade.createUser(username, password);
+    @Path("addUser/{id}")
+    public void addUser(@PathParam("id") Long id) {
+        userFacade.createUser(id);
     }
 
     //delete a User
-    @Path("deleteUser/{username}")
-    public void deleteUser(@PathParam("username") String username) {
-        userFacade.deleteUser(username);
-    }
-
-    //change password
-    @GET
-    @Path("changePassword/{username}/{password}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public boolean changePassword(@PathParam("username") String username, @PathParam("password") String password) {
-        return userFacade.changePassword(username, password);
+    @Path("deleteUser/{id}")
+    public void deleteUser(@PathParam("id") Long id) {
+        userFacade.deleteUser(id);
     }
 }
